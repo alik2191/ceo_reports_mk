@@ -1,0 +1,30 @@
+@import "tailwindcss";
+
+/* Subtle custom connector styling for the organizational tree branches */
+.tree-line-v {
+  position: absolute;
+  width: 2px;
+  background-color: #cbd5e1;
+}
+.tree-line-h {
+  position: absolute;
+  height: 2px;
+  background-color: #cbd5e1;
+}
+
+/* Custom scrollbar for org chart canvas */
+.canvas-scroll::-webkit-scrollbar {
+  height: 6px;
+  width: 6px;
+}
+.canvas-scroll::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+.canvas-scroll::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 4px;
+}
+.canvas-scroll::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}

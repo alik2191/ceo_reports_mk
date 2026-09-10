@@ -1,0 +1,6 @@
+{
+  "name": "Панель CEO · MK Group CPM",
+  "description": "Консолідований огляд MK Group (MK:translations & Localica): Панель CEO, Операції (COO), Планування цілей, Звіти відділу, Щоденник співробітника, KPI в офері, Фінансовий аналітик, Журнал аудиту, Структура компанії, Каталог, Налаштування.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
