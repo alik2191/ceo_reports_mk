@@ -64,9 +64,44 @@ function aistudioMediaPlugin(): Plugin {
 }
 // LINT.ThenChange(//depot/google3/java/com/google/alkali/boq/makersuite/applet_dev_service/templates/initializers/react_theme/vite.config.ts:aistudio_media_plugin)
 
+function apiMockPlugin(): Plugin {
+  return {
+    name: 'api-mock-plugin',
+    configureServer(server) {
+      server.middlewares.use((req, res, next) => {
+        if (req.url === '/api/health') {
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({
+            status: 'ok',
+            service: 'mk-group-crm-backend',
+            environment: 'development',
+            timestamp: new Date().toISOString(),
+          }));
+          return;
+        }
+        if (req.url === '/api/db/schema') {
+          const schemaPath = path.resolve(__dirname, 'src', 'db', 'schema.sql');
+          let schemaContent = '';
+          if (fs.existsSync(schemaPath)) {
+            schemaContent = fs.readFileSync(schemaPath, 'utf8');
+          }
+          res.setHeader('Content-Type', 'application/json');
+          res.end(JSON.stringify({
+            status: 'success',
+            dialect: 'PostgreSQL 15+',
+            schema: schemaContent,
+          }));
+          return;
+        }
+        next();
+      });
+    },
+  };
+}
+
 export default defineConfig(() => {
   return {
-    plugins: [react(), tailwindcss(), aistudioMediaPlugin()],
+    plugins: [react(), tailwindcss(), aistudioMediaPlugin(), apiMockPlugin()],
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),
